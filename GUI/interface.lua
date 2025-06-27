@@ -184,8 +184,6 @@ Header.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
 Header.BorderSizePixel = 0
 Header.Size = UDim2.new(1, 0, 0, 30)
 
-Header.Active = true
-Header.Draggable = true
 
 MinimizeButton.Activated:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
