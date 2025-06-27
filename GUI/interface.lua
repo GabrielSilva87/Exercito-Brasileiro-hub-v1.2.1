@@ -8,12 +8,15 @@ local MinimizeButton = Instance.new("TextButton")
 local Tabs = Instance.new("Frame")
 local TeleportTab = Instance.new("TextButton")
 local CreditsTab = Instance.new("TextButton")
+local AutoTab = Instance.new("TextButton")
 local ContentFrame = Instance.new("Frame")
 local TeleportContent = Instance.new("Frame")
 local AllianceShop = Instance.new("TextButton")
 local CreditsContent = Instance.new("Frame")
 local Dev1 = Instance.new("TextLabel")
 local Dev2 = Instance.new("TextLabel")
+local AutoContent = Instance.new("Frame")
+local AutoTorreButton = Instance.new("TextButton")
 
 -- Propriedades da GUI principal
 ArmyHub.Name = "ArmyHub"
@@ -26,7 +29,7 @@ MainFrame.Parent = ArmyHub
 MainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 MainFrame.BorderSizePixel = 0
 MainFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
-MainFrame.Size = UDim2.new(0, 300, 0, 350)
+MainFrame.Size = UDim2.new(0, 300, 0, 400) -- Aumentado
 
 -- Cabeçalho
 Header.Name = "Header"
@@ -85,7 +88,7 @@ Tabs.Size = UDim2.new(1, 0, 0, 30)
 TeleportTab.Name = "TeleportTab"
 TeleportTab.Parent = Tabs
 TeleportTab.BackgroundTransparency = 1
-TeleportTab.Size = UDim2.new(0.5, 0, 1, 0)
+TeleportTab.Size = UDim2.new(0.333, 0, 1, 0)
 TeleportTab.Font = Enum.Font.GothamBold
 TeleportTab.Text = "Teleporte"
 TeleportTab.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -95,12 +98,23 @@ TeleportTab.TextSize = 14.0
 CreditsTab.Name = "CreditsTab"
 CreditsTab.Parent = Tabs
 CreditsTab.BackgroundTransparency = 1
-CreditsTab.Position = UDim2.new(0.5, 0, 0, 0)
-CreditsTab.Size = UDim2.new(0.5, 0, 1, 0)
+CreditsTab.Position = UDim2.new(0.333, 0, 0, 0)
+CreditsTab.Size = UDim2.new(0.333, 0, 1, 0)
 CreditsTab.Font = Enum.Font.GothamBold
 CreditsTab.Text = "Créditos"
 CreditsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 CreditsTab.TextSize = 14.0
+
+-- Aba Automação
+AutoTab.Name = "AutoTab"
+AutoTab.Parent = Tabs
+AutoTab.BackgroundTransparency = 1
+AutoTab.Position = UDim2.new(0.666, 0, 0, 0)
+AutoTab.Size = UDim2.new(0.333, 0, 1, 0)
+AutoTab.Font = Enum.Font.GothamBold
+AutoTab.Text = "Automação"
+AutoTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoTab.TextSize = 14.0
 
 -- Frame de conteúdo
 ContentFrame.Name = "ContentFrame"
@@ -160,16 +174,54 @@ Dev2.TextColor3 = Color3.fromRGB(255, 255, 255)
 Dev2.TextSize = 14.0
 Dev2.TextXAlignment = Enum.TextXAlignment.Left
 
+-- Conteúdo Automação
+AutoContent.Name = "AutoContent"
+AutoContent.Parent = ContentFrame
+AutoContent.BackgroundTransparency = 1
+AutoContent.Size = UDim2.new(1, 0, 1, 0)
+AutoContent.Visible = false
+
+-- Botão Auto Torre v3
+AutoTorreButton.Name = "AutoTorreButton"
+AutoTorreButton.Parent = AutoContent
+AutoTorreButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+AutoTorreButton.BorderSizePixel = 0
+AutoTorreButton.Position = UDim2.new(0.1, 0, 0.1, 0)
+AutoTorreButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+AutoTorreButton.Font = Enum.Font.GothamBold
+AutoTorreButton.Text = "Auto Torre v3"
+AutoTorreButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoTorreButton.TextSize = 14.0
+
+-- Código executado ao clicar no botão Auto Torre v3
+AutoTorreButton.Activated:Connect(function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/Si3vkHE"))()
+end)
+
 -- Lógica da GUI
 local function toggleTab(selectedTab)
+    -- Resetar cores
     TeleportTab.TextColor3 = Color3.fromRGB(255, 255, 255)
     CreditsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-    selectedTab.TextColor3 = Color3.fromRGB(0, 100, 0) -- Verde escuro
-    
-    TeleportContent.Visible = selectedTab == TeleportTab
-    CreditsContent.Visible = selectedTab == CreditsTab
+    AutoTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+
+    -- Esconder todos os conteúdos
+    TeleportContent.Visible = false
+    CreditsContent.Visible = false
+    AutoContent.Visible = false
+
+    -- Ativar o conteúdo correto
+    selectedTab.TextColor3 = Color3.fromRGB(0, 100, 0)
+    if selectedTab == TeleportTab then
+        TeleportContent.Visible = true
+    elseif selectedTab == CreditsTab then
+        CreditsContent.Visible = true
+    elseif selectedTab == AutoTab then
+        AutoContent.Visible = true
+    end
 end
 
+-- Troca de abas
 TeleportTab.Activated:Connect(function()
     toggleTab(TeleportTab)
 end)
@@ -178,14 +230,21 @@ CreditsTab.Activated:Connect(function()
     toggleTab(CreditsTab)
 end)
 
+AutoTab.Activated:Connect(function()
+    toggleTab(AutoTab)
+end)
+
+-- Fechar GUI
 CloseButton.Activated:Connect(function()
     ArmyHub:Destroy()
 end)
 
+-- Minimizar GUI
 MinimizeButton.Activated:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
 end)
 
+-- Teleporte Loja da Aliança
 AllianceShop.Activated:Connect(function()
     local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
     if character then
