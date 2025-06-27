@@ -195,7 +195,7 @@ AutoTorreButton.TextSize = 14.0
 
 -- Código executado ao clicar no botão Auto Torre v3
 AutoTorreButton.Activated:Connect(function()
-    loadstring(game:HttpGet("https://pastebin.com/raw/Si3vkHE"))()
+    loadstring(game:HttpGet("colocar aq"))()
 end)
 
 -- Lógica da GUI
