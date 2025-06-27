@@ -178,12 +178,9 @@ CloseButton.Activated:Connect(function()
     ArmyHub:Destroy()
 end)
 
-Header.Name = "Header"
-Header.Parent = MainFrame
-Header.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-Header.BorderSizePixel = 0
-Header.Size = UDim2.new(1, 0, 0, 30)
-
+MainFrame.Active = true
+Header.Active = true
+MainFrame.Draggable = true
 
 MinimizeButton.Activated:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
