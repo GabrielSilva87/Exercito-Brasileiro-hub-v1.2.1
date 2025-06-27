@@ -17,8 +17,9 @@ local Dev1 = Instance.new("TextLabel")
 local Dev2 = Instance.new("TextLabel")
 local AutoContent = Instance.new("Frame")
 local AutoTorreButton = Instance.new("TextButton")
+local AutoJJsButton = Instance.new("TextButton") -- Novo botão
 
--- Propriedades da GUI principal
+-- GUI Principal
 ArmyHub.Name = "ArmyHub"
 ArmyHub.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ArmyHub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
@@ -29,7 +30,7 @@ MainFrame.Parent = ArmyHub
 MainFrame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
 MainFrame.BorderSizePixel = 0
 MainFrame.Position = UDim2.new(0.3, 0, 0.3, 0)
-MainFrame.Size = UDim2.new(0, 300, 0, 400) -- Aumentado
+MainFrame.Size = UDim2.new(0, 300, 0, 400)
 
 -- Cabeçalho
 Header.Name = "Header"
@@ -76,7 +77,7 @@ MinimizeButton.Text = "_"
 MinimizeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 MinimizeButton.TextSize = 14.0
 
--- Barra de abas
+-- Abas
 Tabs.Name = "Tabs"
 Tabs.Parent = MainFrame
 Tabs.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
@@ -84,7 +85,6 @@ Tabs.BorderSizePixel = 0
 Tabs.Position = UDim2.new(0, 0, 0, 30)
 Tabs.Size = UDim2.new(1, 0, 0, 30)
 
--- Aba Teleporte
 TeleportTab.Name = "TeleportTab"
 TeleportTab.Parent = Tabs
 TeleportTab.BackgroundTransparency = 1
@@ -94,7 +94,6 @@ TeleportTab.Text = "Teleporte"
 TeleportTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 TeleportTab.TextSize = 14.0
 
--- Aba Créditos
 CreditsTab.Name = "CreditsTab"
 CreditsTab.Parent = Tabs
 CreditsTab.BackgroundTransparency = 1
@@ -105,7 +104,6 @@ CreditsTab.Text = "Créditos"
 CreditsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
 CreditsTab.TextSize = 14.0
 
--- Aba Automação
 AutoTab.Name = "AutoTab"
 AutoTab.Parent = Tabs
 AutoTab.BackgroundTransparency = 1
@@ -131,7 +129,6 @@ TeleportContent.BackgroundTransparency = 1
 TeleportContent.Size = UDim2.new(1, 0, 1, 0)
 TeleportContent.Visible = true
 
--- Botão Loja da Aliança
 AllianceShop.Name = "AllianceShop"
 AllianceShop.Parent = TeleportContent
 AllianceShop.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
@@ -150,7 +147,6 @@ CreditsContent.BackgroundTransparency = 1
 CreditsContent.Size = UDim2.new(1, 0, 1, 0)
 CreditsContent.Visible = false
 
--- Creditos Dev 1
 Dev1.Name = "Dev1"
 Dev1.Parent = CreditsContent
 Dev1.BackgroundTransparency = 1
@@ -162,7 +158,6 @@ Dev1.TextColor3 = Color3.fromRGB(255, 255, 255)
 Dev1.TextSize = 14.0
 Dev1.TextXAlignment = Enum.TextXAlignment.Left
 
--- Creditos Dev 2
 Dev2.Name = "Dev2"
 Dev2.Parent = CreditsContent
 Dev2.BackgroundTransparency = 1
@@ -193,64 +188,24 @@ AutoTorreButton.Text = "Auto Torre v3"
 AutoTorreButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 AutoTorreButton.TextSize = 14.0
 
--- Código executado ao clicar no botão Auto Torre v3
+-- Script do botão Auto Torre v3
 AutoTorreButton.Activated:Connect(function()
     loadstring(game:HttpGet("colocar aq"))()
 end)
 
--- Lógica da GUI
-local function toggleTab(selectedTab)
-    -- Resetar cores
-    TeleportTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-    CreditsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
-    AutoTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+-- Botão Auto JJ's V2
+AutoJJsButton.Name = "AutoJJsButton"
+AutoJJsButton.Parent = AutoContent
+AutoJJsButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
+AutoJJsButton.BorderSizePixel = 0
+AutoJJsButton.Position = UDim2.new(0.1, 0, 0.35, 0) -- abaixo do Auto Torre
+AutoJJsButton.Size = UDim2.new(0.8, 0, 0.2, 0)
+AutoJJsButton.Font = Enum.Font.GothamBold
+AutoJJsButton.Text = "Auto JJ's V2"
+AutoJJsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+AutoJJsButton.TextSize = 14.0
 
-    -- Esconder todos os conteúdos
-    TeleportContent.Visible = false
-    CreditsContent.Visible = false
-    AutoContent.Visible = false
-
-    -- Ativar o conteúdo correto
-    selectedTab.TextColor3 = Color3.fromRGB(0, 100, 0)
-    if selectedTab == TeleportTab then
-        TeleportContent.Visible = true
-    elseif selectedTab == CreditsTab then
-        CreditsContent.Visible = true
-    elseif selectedTab == AutoTab then
-        AutoContent.Visible = true
-    end
-end
-
--- Troca de abas
-TeleportTab.Activated:Connect(function()
-    toggleTab(TeleportTab)
-end)
-
-CreditsTab.Activated:Connect(function()
-    toggleTab(CreditsTab)
-end)
-
-AutoTab.Activated:Connect(function()
-    toggleTab(AutoTab)
-end)
-
--- Fechar GUI
-CloseButton.Activated:Connect(function()
-    ArmyHub:Destroy()
-end)
-
--- Minimizar GUI
-MinimizeButton.Activated:Connect(function()
-    MainFrame.Visible = not MainFrame.Visible
-end)
-
--- Teleporte Loja da Aliança
-AllianceShop.Activated:Connect(function()
-    local character = game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait()
-    if character then
-        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
-        if humanoidRootPart then
-            humanoidRootPart.CFrame = CFrame.new(Vector3.new(-922.120949609375, 49.01183319091797, 578.9318237304688))
-        end
-    end
+-- Script do botão Auto JJ's V2
+AutoJJsButton.Activated:Connect(function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Zv-yz/AutoJJs/main/Main.lua"))()
 end)
