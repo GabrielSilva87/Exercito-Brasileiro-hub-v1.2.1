@@ -1,1 +1,1 @@
-#g
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GabrielSilva87/Exercito-Brasileiro-hub-v1.2.1/refs/heads/main/GUI/interface.lua"))()
