@@ -17,7 +17,7 @@ local Dev1 = Instance.new("TextLabel")
 local Dev2 = Instance.new("TextLabel")
 local AutoContent = Instance.new("Frame")
 local AutoTorreButton = Instance.new("TextButton")
-local AutoJJsButton = Instance.new("TextButton") -- Novo botão
+local AutoJJsButton = Instance.new("TextButton")
 
 -- GUI Principal
 ArmyHub.Name = "ArmyHub"
@@ -188,9 +188,9 @@ AutoTorreButton.Text = "Auto Torre v3"
 AutoTorreButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 AutoTorreButton.TextSize = 14.0
 
--- Script do botão Auto Torre v3
+-- Script do botão Auto Torre
 AutoTorreButton.Activated:Connect(function()
-    loadstring(game:HttpGet("colocar aq"))()
+    loadstring(game:HttpGet("colocar aq"))() -- substitui com seu link
 end)
 
 -- Botão Auto JJ's V2
@@ -198,14 +198,53 @@ AutoJJsButton.Name = "AutoJJsButton"
 AutoJJsButton.Parent = AutoContent
 AutoJJsButton.BackgroundColor3 = Color3.fromRGB(60, 60, 60)
 AutoJJsButton.BorderSizePixel = 0
-AutoJJsButton.Position = UDim2.new(0.1, 0, 0.35, 0) -- abaixo do Auto Torre
+AutoJJsButton.Position = UDim2.new(0.1, 0, 0.35, 0)
 AutoJJsButton.Size = UDim2.new(0.8, 0, 0.2, 0)
 AutoJJsButton.Font = Enum.Font.GothamBold
 AutoJJsButton.Text = "Auto JJ's V2"
 AutoJJsButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 AutoJJsButton.TextSize = 14.0
 
--- Script do botão Auto JJ's V2
+-- Script do botão Auto JJ's
 AutoJJsButton.Activated:Connect(function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/Zv-yz/AutoJJs/main/Main.lua"))()
+end)
+
+-- Troca de abas
+local function showTab(tabName)
+    TeleportContent.Visible = false
+    CreditsContent.Visible = false
+    AutoContent.Visible = false
+
+    if tabName == "Teleporte" then
+        TeleportContent.Visible = true
+    elseif tabName == "Créditos" then
+        CreditsContent.Visible = true
+    elseif tabName == "Automação" then
+        AutoContent.Visible = true
+    end
+end
+
+TeleportTab.MouseButton1Click:Connect(function()
+    showTab("Teleporte")
+end)
+
+CreditsTab.MouseButton1Click:Connect(function()
+    showTab("Créditos")
+end)
+
+AutoTab.MouseButton1Click:Connect(function()
+    showTab("Automação")
+end)
+
+-- Botão de fechar
+CloseButton.MouseButton1Click:Connect(function()
+    ArmyHub:Destroy()
+end)
+
+-- Botão de minimizar
+local minimized = false
+MinimizeButton.MouseButton1Click:Connect(function()
+    minimized = not minimized
+    ContentFrame.Visible = not minimized
 end)
