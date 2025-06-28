@@ -208,7 +208,7 @@ AutoJJsButton.TextSize = 14.0
 
 -- Código executado ao clicar no botão Auto Torre v3
 AutoTorreButton.Activated:Connect(function()
-    loadstring(game:HttpGet("colocar aq"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GabrielSilva87/Exercito-Brasileiro-hub-v1.2.1/refs/heads/main/GUI/Auto%20Torre%20v3/movim.lua"))()
 end)
 
 -- Código executado ao clicar no botão Auto JJs
