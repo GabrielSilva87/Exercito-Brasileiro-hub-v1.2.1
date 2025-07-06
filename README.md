@@ -1,0 +1,1 @@
+Scripts de portão, patente, dispositivo, e até mesmo alarme e horas
